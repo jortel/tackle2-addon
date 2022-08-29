@@ -35,9 +35,30 @@ func New(destDir string, application *api.Application) (r Repository, err error)
 //
 // Repository interface.
 type Repository interface {
+	//
+	// With constructor.
 	With(path string, application *api.Application)
-	Fetch() (err error)
+	//
+	// Validate settings.
 	Validate() (err error)
+	//
+	// Fetch the repository.
+	Fetch() (err error)
+	//
+	// Add a file.
+	Add(path string) (err error)
+	//
+	// Delete a file.
+	Delete(path string) (err error)
+	//
+	// CreateBranch creates a branch.
+	CreateBranch(name string) (err error)
+	//
+	// DeleteBranch deletes a branch.
+	DeleteBranch(name string) (err error)
+	//
+	// Commit changes.
+	Commit() (err error)
 }
 
 //

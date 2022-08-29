@@ -90,6 +90,36 @@ func (r *Subversion) Fetch() (err error) {
 }
 
 //
+// Add a file.
+func (r *Subversion) Add(path string) (err error) {
+	return
+}
+
+//
+// Delete a file.
+func (r *Subversion) Delete(path string) (err error) {
+	return
+}
+
+//
+// CreateBranch creates a branch.
+func (r *Subversion) CreateBranch(name string) (err error) {
+	return
+}
+
+//
+// DeleteBranch deletes a branch.
+func (r *Subversion) DeleteBranch(name string) (err error) {
+	return
+}
+
+//
+// Commit changes.
+func (r *Subversion) Commit() (err error) {
+	return
+}
+
+//
 // URL returns the parsed URL.
 func (r *Subversion) URL() (u *urllib.URL) {
 	repository := r.Application.Repository

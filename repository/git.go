@@ -85,6 +85,36 @@ func (r *Git) Fetch() (err error) {
 }
 
 //
+// Add a file.
+func (r *Git) Add(path string) (err error) {
+	return
+}
+
+//
+// Delete a file.
+func (r *Git) Delete(path string) (err error) {
+	return
+}
+
+//
+// CreateBranch creates a branch.
+func (r *Git) CreateBranch(name string) (err error) {
+	return
+}
+
+//
+// DeleteBranch deletes a branch.
+func (r *Git) DeleteBranch(name string) (err error) {
+	return
+}
+
+//
+// Commit changes.
+func (r *Git) Commit() (err error) {
+	return
+}
+
+//
 // URL returns the parsed URL.
 func (r *Git) URL() (u GitURL) {
 	u = GitURL{}
