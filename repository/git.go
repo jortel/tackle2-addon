@@ -74,7 +74,7 @@ func (r *Git) Fetch() (err error) {
 	if err != nil {
 		return
 	}
-	cmd := command.Command{Path: "/usr/bin/git"}
+	cmd := r.command()
 	cmd.Options.Add("clone", url.String(), r.Path)
 	err = cmd.Run()
 	if err != nil {
@@ -87,30 +87,50 @@ func (r *Git) Fetch() (err error) {
 //
 // Add a file.
 func (r *Git) Add(path string) (err error) {
+	addon.Activity("[GIT] Add: %s", path)
+	cmd := r.command()
+	cmd.Options.Add("add", path)
+	err = cmd.Run()
 	return
 }
 
 //
 // Delete a file.
 func (r *Git) Delete(path string) (err error) {
+	addon.Activity("[GIT] Delete: %s", path)
+	cmd := r.command()
+	cmd.Options.Add("rm", path)
+	err = cmd.Run()
 	return
 }
 
 //
 // CreateBranch creates a branch.
 func (r *Git) CreateBranch(name string) (err error) {
+	addon.Activity("[GIT] Create branch: %s", name)
+	cmd := r.command()
+	cmd.Options.Add("branch", name)
+	err = cmd.Run()
 	return
 }
 
 //
 // DeleteBranch deletes a branch.
 func (r *Git) DeleteBranch(name string) (err error) {
+	addon.Activity("[GIT] Delete branch: %s", name)
+	cmd := r.command()
+	cmd.Options.Add("branch", "-d", name)
+	err = cmd.Run()
 	return
 }
 
 //
 // Commit changes.
-func (r *Git) Commit() (err error) {
+func (r *Git) Commit(message string) (err error) {
+	addon.Activity("[GIT] Commit.")
+	cmd := r.command()
+	cmd.Options.Add("commit", "-am", message)
+	err = cmd.Run()
 	return
 }
 
@@ -119,6 +139,13 @@ func (r *Git) Commit() (err error) {
 func (r *Git) URL() (u GitURL) {
 	u = GitURL{}
 	_ = u.With(r.Application.Repository.URL)
+	return
+}
+
+//
+// command builds the base Git command.
+func (r *Git) command() (cmd *command.Command) {
+	cmd = &command.Command{Path: "/usr/bin/git"}
 	return
 }
 

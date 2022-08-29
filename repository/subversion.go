@@ -79,7 +79,7 @@ func (r *Subversion) Fetch() (err error) {
 	if err != nil {
 		return
 	}
-	cmd := command.Command{Path: "/usr/bin/svn"}
+	cmd := r.command()
 	cmd.Options.Add("--non-interactive")
 	if insecure {
 		cmd.Options.Add("--trust-server-cert")
@@ -92,30 +92,48 @@ func (r *Subversion) Fetch() (err error) {
 //
 // Add a file.
 func (r *Subversion) Add(path string) (err error) {
+	addon.Activity("[SVN] Add: %s", path)
+	cmd := r.command()
+	cmd.Options.Add("add", path)
+	err = cmd.Run()
 	return
 }
 
 //
 // Delete a file.
 func (r *Subversion) Delete(path string) (err error) {
+	addon.Activity("[SVN] Delete: %s", path)
+	cmd := r.command()
+	cmd.Options.Add("delete", path)
+	err = cmd.Run()
 	return
 }
 
 //
 // CreateBranch creates a branch.
 func (r *Subversion) CreateBranch(name string) (err error) {
+	addon.Activity("[SVN] Create branch: %s", name)
+	cmd := r.command()
+	cmd.Options.Add(
+		"copy",
+		r.URL().String())
+	err = cmd.Run()
 	return
 }
 
 //
 // DeleteBranch deletes a branch.
 func (r *Subversion) DeleteBranch(name string) (err error) {
+	addon.Activity("[SVN] Delete branch: %s", name)
+	cmd := r.command()
+	cmd.Options.Add("delete", name)
+	err = cmd.Run()
 	return
 }
 
 //
 // Commit changes.
-func (r *Subversion) Commit() (err error) {
+func (r *Subversion) Commit(message string) (err error) {
 	return
 }
 
@@ -129,6 +147,13 @@ func (r *Subversion) URL() (u *urllib.URL) {
 		branch = "trunk"
 	}
 	u.Path += "/" + branch
+	return
+}
+
+//
+// command builds the base Subversion command.
+func (r *Subversion) command() (cmd *command.Command) {
+	cmd = &command.Command{Path: "/usr/bin/git"}
 	return
 }
 

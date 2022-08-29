@@ -58,7 +58,7 @@ type Repository interface {
 	DeleteBranch(name string) (err error)
 	//
 	// Commit changes.
-	Commit() (err error)
+	Commit(message string) (err error)
 }
 
 //
