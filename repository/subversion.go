@@ -110,23 +110,14 @@ func (r *Subversion) Delete(path string) (err error) {
 }
 
 //
-// CreateBranch creates a branch.
-func (r *Subversion) CreateBranch(name string) (err error) {
-	addon.Activity("[SVN] Create branch: %s", name)
+// Branch checks out the specified branch.
+// The branch is created if it does not exist.
+func (r *Subversion) Branch(name string) (err error) {
+	addon.Activity("[SVN] Branch: %s", name)
 	cmd := r.command()
 	cmd.Options.Add(
 		"copy",
 		r.URL().String())
-	err = cmd.Run()
-	return
-}
-
-//
-// DeleteBranch deletes a branch.
-func (r *Subversion) DeleteBranch(name string) (err error) {
-	addon.Activity("[SVN] Delete branch: %s", name)
-	cmd := r.command()
-	cmd.Options.Add("delete", name)
 	err = cmd.Run()
 	return
 }

@@ -105,21 +105,37 @@ func (r *Git) Delete(path string) (err error) {
 }
 
 //
-// CreateBranch creates a branch.
-func (r *Git) CreateBranch(name string) (err error) {
-	addon.Activity("[GIT] Create branch: %s", name)
+// Branch checks out the specified branch.
+// The branch is created if it does not exist.
+func (r *Git) Branch(name string) (err error) {
+	addon.Activity("[GIT] Branch: %s", name)
 	cmd := r.command()
-	cmd.Options.Add("branch", name)
+	cmd.Options.Add("show-ref", "refs/heads/" + name)
 	err = cmd.Run()
-	return
-}
-
-//
-// DeleteBranch deletes a branch.
-func (r *Git) DeleteBranch(name string) (err error) {
-	addon.Activity("[GIT] Delete branch: %s", name)
-	cmd := r.command()
-	cmd.Options.Add("branch", "-d", name)
+	if err != nil {
+		cmd := r.command()
+		cmd.Options.Add("branch", name)
+		err = cmd.Run()
+		if err != nil {
+			return
+		}
+		cmd = r.command()
+		cmd.Options.Add("push","origin")
+		cmd.Options.Addf("%s:refs/heads/%s", name, name)
+		err = cmd.Run()
+		if err != nil {
+			return
+		}
+		cmd = r.command()
+		cmd.Options.Add("branch","-d", name)
+		err = cmd.Run()
+		if err != nil {
+			return
+		}
+	}
+	cmd = r.command()
+	cmd.Options.Add("checkout", "--track", "-b", name)
+	cmd.Options.Addf("origin/$s", name)
 	err = cmd.Run()
 	return
 }

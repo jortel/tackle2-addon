@@ -51,11 +51,8 @@ type Repository interface {
 	// Delete a file.
 	Delete(path string) (err error)
 	//
-	// CreateBranch creates a branch.
-	CreateBranch(name string) (err error)
-	//
-	// DeleteBranch deletes a branch.
-	DeleteBranch(name string) (err error)
+	// Branch creates a branch.
+	Branch(name string) (err error)
 	//
 	// Commit changes.
 	Commit(message string) (err error)
