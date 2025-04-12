@@ -1,6 +1,7 @@
 package command
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/konveyor/tackle2-hub/api"
@@ -37,6 +38,10 @@ func (r *Reporter) Run(path string, options Options) {
 			path,
 			strings.Join(options, " "))
 	}
+	r.append([]byte(
+		fmt.Sprintf("// %s %s\n\n",
+			path,
+			strings.Join(options, " "))))
 }
 
 // Succeeded reports command succeeded in task Report.Activity.
