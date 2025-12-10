@@ -5,7 +5,7 @@ import (
 
 	"github.com/konveyor/tackle2-addon/command"
 	"github.com/konveyor/tackle2-addon/sink"
-	"github.com/konveyor/tackle2-hub/ssh"
+	"github.com/konveyor/tackle2-hub/shared/ssh"
 )
 
 func init() {

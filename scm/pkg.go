@@ -6,9 +6,9 @@ import (
 
 	"github.com/konveyor/tackle2-addon/command"
 	"github.com/konveyor/tackle2-addon/sink"
-	hub "github.com/konveyor/tackle2-hub/addon"
-	"github.com/konveyor/tackle2-hub/api"
-	"github.com/konveyor/tackle2-hub/scm"
+	hub "github.com/konveyor/tackle2-hub/shared/addon"
+	"github.com/konveyor/tackle2-hub/shared/api"
+	"github.com/konveyor/tackle2-hub/shared/scm"
 )
 
 var (

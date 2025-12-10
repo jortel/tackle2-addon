@@ -10,8 +10,8 @@ import (
 	"path"
 
 	"github.com/konveyor/tackle2-addon/sink"
-	hub "github.com/konveyor/tackle2-hub/addon"
-	"github.com/konveyor/tackle2-hub/command"
+	hub "github.com/konveyor/tackle2-hub/shared/addon"
+	"github.com/konveyor/tackle2-hub/shared/command"
 )
 
 var (
