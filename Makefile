@@ -2,8 +2,10 @@ GOPATH ?= $(HOME)/go
 GOBIN ?= $(GOPATH)/bin
 GOIMPORTS = $(GOBIN)/goimports
 
-PKG = ./cmd/... \
+PKG = ./addon/... \
+      ./cmd/... \
       ./command/... \
+      ./nas/... \
       ./scm/... \
       ./ssh/...
 

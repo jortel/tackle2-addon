@@ -6,10 +6,11 @@ import (
 
 // Environment.
 const (
-	EnvSharedDir = addon.EnvSharedPath
-	EnvCacheDir  = addon.EnvCachePath
-	EnvToken     = addon.EnvHubToken
+	EnvSharedDir = addon.EnvSharedDir
+	EnvCacheDir  = addon.EnvCacheDir
+	EnvToken     = addon.EnvToken
 	EnvTask      = addon.EnvTask
 )
 
-var Addon addon.Addon
+// Addon adapter.
+var Addon *addon.Adapter = addon.Addon
