@@ -13,4 +13,4 @@ const (
 )
 
 // Addon adapter.
-var Addon *addon.Adapter = addon.Addon
+var Addon = addon.Addon
